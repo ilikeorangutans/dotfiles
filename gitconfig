@@ -1,0 +1,28 @@
+[user]
+	name = Jakob Külzer
+	email = jakob.kulzer@gmail.com
+
+[alias]
+  st = status
+  co = checkout
+  br = branch
+  d = diff
+  rb = rebase
+  gn = grep -n
+  gni = grep -ni
+  l = log
+  lp = log -p
+  ln = log --name-status
+  cp = cherry-pick
+
+[push]
+	default = nothing
+
+[core]
+	excludesfile = ~/.gitignore
+  editor = vim
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	required = true
