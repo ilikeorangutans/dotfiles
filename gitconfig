@@ -14,6 +14,8 @@
   lp = log -p
   ln = log --name-status
   cp = cherry-pick
+  ci = commit
+  civ = commit --verbose
 
 [push]
 	default = nothing
