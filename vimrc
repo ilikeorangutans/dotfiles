@@ -18,6 +18,7 @@ Plugin 'chase/vim-ansible-yaml'
 Plugin 'tpope/vim-surround'
 Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'editorconfig/editorconfig-vim'
+Bundle 'christoomey/vim-tmux-navigator'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
