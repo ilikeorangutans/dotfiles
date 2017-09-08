@@ -84,7 +84,7 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
 
-colorscheme corporation
+colorscheme obsidian
 
 set shell=/bin/bash
 
