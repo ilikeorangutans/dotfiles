@@ -9,7 +9,8 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'fatih/vim-go'
 Plugin 'tpope/vim-rails'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'Shougo/neocomplete.vim'
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'JazzCore/ctrlp-cmatcher'
 Plugin 'rking/ag.vim'
@@ -108,3 +109,9 @@ augroup filetype_lua
   autocmd!
   autocmd FileType lua setlocal iskeyword+=:
 augroup END
+
+let g:acp_enableAtStartup = 0
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
