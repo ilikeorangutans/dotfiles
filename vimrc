@@ -55,6 +55,9 @@ set cursorline
 set relativenumber
 set history=10000
 
+let g:netrw_liststyle = 3
+let g:netrw_banner = 0
+
 let mapleader=","
 
 let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
