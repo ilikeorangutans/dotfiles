@@ -16,6 +16,8 @@
   cp = cherry-pick
   ci = commit
   civ = commit --verbose
+  pp = pull --prune
+  wip = commit -m "wip"
 
 [push]
 	default = nothing
