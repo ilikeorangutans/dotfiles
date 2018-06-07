@@ -64,7 +64,9 @@ let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
 let g:ctrlp_use_caching = 0
 let g:ctrlp_max_files = 100000
 let g:ctrlp_max_height = 30
-let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
+if has("linux")
+  let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
+endif
 let g:ctrlp_extensions = ['tag']
 
 au FileType go nmap <leader>r <Plug>(go-run)
