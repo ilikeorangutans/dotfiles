@@ -34,3 +34,5 @@
 [diff]
   algorithm = patience
 
+[pager]
+  branch =

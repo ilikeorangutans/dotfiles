@@ -1,9 +1,9 @@
-colorscheme hybrid
+colorscheme CandyPaper
 
 if has('unix')
   if has('mac')
     set guifont=Fira_Code:h13
-    set macligatures
+    "set macligatures
     set shell=/bin/bash
     set guioptions-=T
     set guioptions-=r
