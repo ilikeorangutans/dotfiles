@@ -1,6 +1,6 @@
 [user]
 	name = Jakob Külzer
-	email = jakob.kulzer@gmail.com
+	email = jakob.kuelzer@gmail.com
 
 [alias]
   st = status
@@ -18,6 +18,7 @@
   civ = commit --verbose
   pp = pull --prune
   wip = commit -m "wip"
+  brage = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
 
 [push]
 	default = nothing
@@ -36,3 +37,8 @@
 
 [pager]
   branch =
+  diff = diff-so-fancy | less --tabs=4 -RFX
+[protocol]
+	version = 2
+[credential]
+	helper = osxkeychain
