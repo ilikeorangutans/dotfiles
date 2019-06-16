@@ -44,7 +44,8 @@ set cmdheight=3
 set pastetoggle=<F11>
 
 set shiftwidth=2
-set tabstop=2
+set softtabstop=2
+set tabstop=8
 set expandtab
 set grepprg=ag\ --nogroup\ --nocolor
 set backup
