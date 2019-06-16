@@ -1,4 +1,4 @@
-set nocompatible
+" not needed in a .vimrc " set nocompatible
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -90,7 +90,7 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
 
-colorscheme CandyPaper
+colorscheme tender
 
 set shell=/bin/bash
 
