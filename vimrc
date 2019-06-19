@@ -23,6 +23,11 @@ Bundle 'christoomey/vim-tmux-navigator'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+if has('macunix')
+  source ~/.vimrc.darwin
+
+endif
+
 set backspace=indent,eol,start
 
 syntax on
