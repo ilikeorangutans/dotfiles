@@ -7,10 +7,8 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'fatih/vim-go'
-Plugin 'tpope/vim-rails'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'Shougo/neocomplete.vim'
-Plugin 'nsf/gocode', {'rtp': 'vim/'}
+Plugin 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'JazzCore/ctrlp-cmatcher'
 Plugin 'rking/ag.vim'
@@ -20,12 +18,16 @@ Plugin 'tpope/vim-surround'
 Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'editorconfig/editorconfig-vim'
 Bundle 'christoomey/vim-tmux-navigator'
+Plugin 'mdempsky/gocode', {'rtp': 'vim/'}
+Plugin 'Shougo/deoplete.nvim'
+Plugin 'deoplete-plugins/deoplete-go'
+Plugin 'roxma/nvim-yarp'
+Plugin 'roxma/vim-hug-neovim-rpc'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
 if has('macunix')
   source ~/.vimrc.darwin
-
 endif
 
 set backspace=indent,eol,start
@@ -87,7 +89,9 @@ au FileType go nmap <Leader>gd <Plug>(go-doc)
 au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 au FileType go nmap <Leader>s <Plug>(go-implements)
 au FileType go nmap <Leader>i <Plug>(go-info)
+au FileType go setlocal tabstop=4
 
+let g:go_code_completion_enabled = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
@@ -121,8 +125,17 @@ augroup filetype_lua
   autocmd FileType lua setlocal iskeyword+=:
 augroup END
 
-let g:acp_enableAtStartup = 0
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+let g:LanguageClient_serverCommands = {
+  \ 'ruby': ['tcp://localhost:7658'],
+  \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+  \ }
+let g:LanguageClient_autoStop = 0
+
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+"au FileType ruby setlocal omnifunc=LanguageClient#complete
+
+let g:deoplete#enable_at_startup = 1
+
+autocmd FileType ruby setlocal nocursorline
