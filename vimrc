@@ -9,8 +9,8 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'fatih/vim-go'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'JazzCore/ctrlp-cmatcher'
+set rtp+=~/.fzf
+Plugin 'junegunn/fzf.vim'
 Plugin 'rking/ag.vim'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'chase/vim-ansible-yaml'
@@ -68,14 +68,8 @@ let g:netrw_banner = 0
 
 let mapleader=","
 
-let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-let g:ctrlp_use_caching = 0
-let g:ctrlp_max_files = 100000
-let g:ctrlp_max_height = 30
-if has("linux")
-  let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
-endif
-let g:ctrlp_extensions = ['tag']
+nnoremap <c-p> :Files <CR>
+nnoremap <c-t> :Tags <CR>
 
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
@@ -100,7 +94,8 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
 
-colorscheme tender
+"colorscheme tender
+colorscheme desertink
 
 set shell=/bin/bash
 
