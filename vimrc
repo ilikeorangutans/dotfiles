@@ -1,72 +1,73 @@
-" not needed in a .vimrc " set nocompatible
-filetype off
-
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'fatih/vim-go'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh'}
-set rtp+=~/.fzf
-Plugin 'junegunn/fzf.vim'
-Plugin 'rking/ag.vim'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'chase/vim-ansible-yaml'
-Plugin 'tpope/vim-surround'
-Plugin 'ludovicchabant/vim-gutentags'
-Plugin 'editorconfig/editorconfig-vim'
-Bundle 'christoomey/vim-tmux-navigator'
-Plugin 'mdempsky/gocode', {'rtp': 'vim/'}
-Plugin 'Shougo/deoplete.nvim'
-Plugin 'deoplete-plugins/deoplete-go'
-Plugin 'roxma/nvim-yarp'
-Plugin 'roxma/vim-hug-neovim-rpc'
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#begin()
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'flazz/vim-colorschemes'
+Plug 'tpope/vim-fugitive'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-surround'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'mdempsky/gocode', {'rtp': 'vim/'}
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'lighttiger2505/deoplete-vim-lsp'
+Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'janko/vim-test'
+Plug 'https://tpope.io/vim/dispatch.git'
+call plug#end()
 
 if has('macunix')
   source ~/.vimrc.darwin
 endif
 
-set backspace=indent,eol,start
+filetype plugin indent on
 
+colorscheme desertink
 syntax on
-set number
-set ruler
-set hidden
-set hlsearch
-set ignorecase
-set smartcase
-set incsearch
-set wildmenu
 
 set autoindent
-set nostartofline
-set laststatus=2
-set confirm
-set mouse=a
-set cmdheight=3
-set pastetoggle=<F11>
-
-set shiftwidth=2
-set softtabstop=2
-set tabstop=8
-set expandtab
-set grepprg=ag\ --nogroup\ --nocolor
+set backspace=indent,eol,start
 set backup
 set backupdir=~/.vim/backup//
-set directory=~/.vim/swap//
-set undodir=~/.vim/undo//
+set cmdheight=3
+set confirm
 set cursorline
-set relativenumber
+set directory=~/.vim/swap//
+set expandtab
+set grepprg=ag\ --nogroup\ --nocolor
+set hidden
 set history=10000
+set hlsearch
+set ignorecase
+set incsearch
+set laststatus=2
+set mouse=a
+set nostartofline
+set number
+set pastetoggle=<F11>
+set relativenumber
+set ruler
+set shiftwidth=2
+set smartcase
+set softtabstop=2
+set tabstop=8
+set undodir=~/.vim/undo//
+set wildmenu
 
+let mapleader=","
 let g:netrw_liststyle = 3
 let g:netrw_banner = 0
 
 let mapleader=","
+
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
 
 nnoremap <c-p> :Files <CR>
 nnoremap <c-t> :Tags <CR>
@@ -94,43 +95,38 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
 
-"colorscheme tender
-colorscheme desertink
-
-set shell=/bin/bash
-
-nmap <c-s> <esc>:w<CR>
-nnoremap K :Ag '<C-R><C-W>'<CR>
-" Switch between the last two files
-nnoremap <leader><leader> <c-^>
+autocmd FileType ruby setlocal nocursorline
 
 autocmd BufWritePre * :%s/\s\+$//e
 
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-h> <c-w>h
-nnoremap <c-l> <c-w>l
+let test#strategy = "dispatch"
 
+au FileType go nmap <leader>t <Plug>:TestNearest<CR>
 
-nnoremap <silent> [b :bprevious
-nnoremap <silent> ]b :bnext
+if executable('solargraph')
+  au User lsp_setup call lsp#register_server({
+	\ 'name': 'solargraph',
+	\ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
+	\ 'initialization_options': {"diagnostics": "true"},
+	\ 'whitelist': ['ruby'],
+	\ })
+endif
+if executable('rls')
+  au User lsp_setup call lsp#register_server({
+        \ 'name': 'rls',
+        \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rls']},
+        \ 'workspace_config': {'rust': {'clippy_preference': 'on'}},
+        \ 'whitelist': ['rust'],
+        \ })
+endif
+if executable('gopls')
+  au User lsp_setup call lsp#register_server({
+	\ 'name': 'gopls',
+	\ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
+	\ 'whitelist': ['go'],
+	\ })
+endif
 
-augroup filetype_lua
-  autocmd!
-  autocmd FileType lua setlocal iskeyword+=:
-augroup END
-
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-let g:LanguageClient_serverCommands = {
-  \ 'ruby': ['tcp://localhost:7658'],
-  \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-  \ }
-let g:LanguageClient_autoStop = 0
-
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-"au FileType ruby setlocal omnifunc=LanguageClient#complete
+let $FZF_DEFAULT_COMMAND='fd --type f'
 
 let g:deoplete#enable_at_startup = 1
-
-autocmd FileType ruby setlocal nocursorline
