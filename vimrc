@@ -103,14 +103,12 @@ let test#strategy = "dispatch"
 
 au FileType go nmap <leader>t <Plug>:TestNearest<CR>
 
-if executable('solargraph')
-  au User lsp_setup call lsp#register_server({
-	\ 'name': 'solargraph',
-	\ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
-	\ 'initialization_options': {"diagnostics": "true"},
-	\ 'whitelist': ['ruby'],
-	\ })
-endif
+au User lsp_setup call lsp#register_server({
+      \ 'name': 'solargraph',
+      \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
+      \ 'initialization_options': {"diagnostics": "true"},
+      \ 'whitelist': ['ruby'],
+      \ })
 if executable('rls')
   au User lsp_setup call lsp#register_server({
         \ 'name': 'rls',
@@ -130,3 +128,11 @@ endif
 let $FZF_DEFAULT_COMMAND='fd --type f'
 
 let g:deoplete#enable_at_startup = 1
+function! s:check_back_space() abort "{{{
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction"}}}
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ deoplete#manual_complete()
