@@ -18,6 +18,7 @@ Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'janko/vim-test'
 Plug 'https://tpope.io/vim/dispatch.git'
+Plug 'rust-lang/rust.vim'
 call plug#end()
 
 if has('macunix')
