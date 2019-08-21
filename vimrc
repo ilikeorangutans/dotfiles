@@ -128,6 +128,8 @@ endif
 
 let $FZF_DEFAULT_COMMAND='fd --type f'
 
+let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
+
 let g:deoplete#enable_at_startup = 1
 function! s:check_back_space() abort "{{{
   let col = col('.') - 1
