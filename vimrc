@@ -10,12 +10,10 @@ Plug 'tpope/vim-surround'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'mdempsky/gocode', {'rtp': 'vim/'}
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'lighttiger2505/deoplete-vim-lsp'
-Plug 'Shougo/deoplete.nvim'
-Plug 'roxma/nvim-yarp'
-Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 Plug 'janko/vim-test'
 Plug 'https://tpope.io/vim/dispatch.git'
 Plug 'rust-lang/rust.vim'
@@ -104,38 +102,20 @@ let test#strategy = "dispatch"
 
 au FileType go nmap <leader>t <Plug>:TestNearest<CR>
 
-au User lsp_setup call lsp#register_server({
-      \ 'name': 'solargraph',
-      \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
-      \ 'initialization_options': {"diagnostics": "true"},
-      \ 'whitelist': ['ruby'],
-      \ })
-if executable('rls')
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'rls',
-        \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rls']},
-        \ 'workspace_config': {'rust': {'clippy_preference': 'on'}},
-        \ 'whitelist': ['rust'],
-        \ })
-endif
-if executable('gopls')
-  au User lsp_setup call lsp#register_server({
-	\ 'name': 'gopls',
-	\ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
-	\ 'whitelist': ['go'],
-	\ })
-endif
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
+    \ 'python': ['/usr/local/bin/pyls'],
+    \ 'ruby': ['solargraph', 'stdio'],
+    \ }
 
 let $FZF_DEFAULT_COMMAND='fd --type f'
 
 let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
 
-let g:deoplete#enable_at_startup = 1
-function! s:check_back_space() abort "{{{
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction"}}}
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ deoplete#manual_complete()
+set completeopt=longest,menuone
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
