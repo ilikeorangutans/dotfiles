@@ -17,6 +17,9 @@ Plug 'autozimu/LanguageClient-neovim', {
 Plug 'janko/vim-test'
 Plug 'https://tpope.io/vim/dispatch.git'
 Plug 'rust-lang/rust.vim'
+Plug 'arzg/vim-corvine'
+Plug 'cespare/vim-toml'
+Plug 'lifepillar/vim-mucomplete'
 call plug#end()
 
 if has('macunix')
@@ -104,7 +107,7 @@ au FileType go nmap <leader>t <Plug>:TestNearest<CR>
 
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+    \ 'javascript': ['javascript-typescript-stdio'],
     \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
     \ 'python': ['/usr/local/bin/pyls'],
     \ 'ruby': ['solargraph', 'stdio'],
@@ -114,8 +117,8 @@ let $FZF_DEFAULT_COMMAND='fd --type f'
 
 let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
 
-set completeopt=longest,menuone
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
-  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+set completeopt+=menuone
+set shortmess+=c   " Shut off completion messages
+set belloff+=ctrlg " If Vim beeps during completion
+
 
