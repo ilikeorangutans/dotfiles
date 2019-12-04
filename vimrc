@@ -20,6 +20,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'arzg/vim-corvine'
 Plug 'cespare/vim-toml'
 Plug 'lifepillar/vim-mucomplete'
+Plug 'elmcast/elm-vim'
 call plug#end()
 
 if has('macunix')
@@ -121,4 +122,6 @@ set completeopt+=menuone
 set shortmess+=c   " Shut off completion messages
 set belloff+=ctrlg " If Vim beeps during completion
 
+au FileType rust nmap <leader>r :RustRun<CR>
+au FileType rust nmap <leader>f :RustFmt<CR>
 
