@@ -9,11 +9,6 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-surround'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'mdempsky/gocode', {'rtp': 'vim/'}
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
 Plug 'janko/vim-test'
 Plug 'https://tpope.io/vim/dispatch.git'
 Plug 'rust-lang/rust.vim'
@@ -21,6 +16,7 @@ Plug 'arzg/vim-corvine'
 Plug 'cespare/vim-toml'
 Plug 'lifepillar/vim-mucomplete'
 Plug 'elmcast/elm-vim'
+Plug 'fatih/molokai'
 call plug#end()
 
 if has('macunix')
@@ -29,7 +25,11 @@ endif
 
 filetype plugin indent on
 
-colorscheme desertink
+"colorscheme desertink
+let g:rehash256 = 1
+let g:molokai_original = 0
+colorscheme molokai
+
 syntax on
 
 set autoindent
@@ -105,14 +105,6 @@ autocmd BufWritePre * :%s/\s\+$//e
 let test#strategy = "dispatch"
 
 au FileType go nmap <leader>t <Plug>:TestNearest<CR>
-
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-    \ 'javascript': ['javascript-typescript-stdio'],
-    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
-    \ 'python': ['/usr/local/bin/pyls'],
-    \ 'ruby': ['solargraph', 'stdio'],
-    \ }
 
 let $FZF_DEFAULT_COMMAND='fd --type f'
 
