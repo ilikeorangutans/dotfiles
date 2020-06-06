@@ -28,7 +28,9 @@ filetype plugin indent on
 "colorscheme desertink
 let g:rehash256 = 1
 let g:molokai_original = 0
-colorscheme molokai
+set background=dark
+"colorscheme molokai
+colorscheme gruvbox
 
 syntax on
 
