@@ -1,3 +1,9 @@
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin()
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'flazz/vim-colorschemes'
@@ -15,9 +21,19 @@ Plug 'rust-lang/rust.vim'
 Plug 'arzg/vim-corvine'
 Plug 'cespare/vim-toml'
 Plug 'lifepillar/vim-mucomplete'
-Plug 'elmcast/elm-vim'
-Plug 'fatih/molokai'
+"Plug 'elmcast/elm-vim'
+Plug 'dhruvasagar/vim-table-mode'
+"Plug 'davidhalter/jedi-vim'
+"Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+"Plug 'evanleck/vim-svelte', {'branch': 'main'}
+
 call plug#end()
+
+let g:pymode = 1
+let g:pymode_python = 'python3'
+let g:pymode_warnings = 1
+let g:pymode_options = 1
+
 
 if has('macunix')
   source ~/.vimrc.darwin
@@ -27,9 +43,8 @@ filetype plugin indent on
 
 "colorscheme desertink
 let g:rehash256 = 1
-let g:molokai_original = 0
+
 set background=dark
-"colorscheme molokai
 colorscheme gruvbox
 
 syntax on
@@ -118,4 +133,6 @@ set belloff+=ctrlg " If Vim beeps during completion
 
 au FileType rust nmap <leader>r :RustRun<CR>
 au FileType rust nmap <leader>f :RustFmt<CR>
+
+let g:rustfmt_autosave = 1
 
