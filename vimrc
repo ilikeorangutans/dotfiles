@@ -21,6 +21,7 @@ Plug 'arzg/vim-corvine'
 Plug 'cespare/vim-toml'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dhruvasagar/vim-table-mode'
+Plug 'aonemd/kuroi.vim'
 call plug#end()
 
 let g:pymode = 1
@@ -39,7 +40,9 @@ filetype plugin indent on
 let g:rehash256 = 1
 
 set background=dark
-colorscheme gruvbox
+set t_Co=256
+" set termguicolors# only needed for gvim
+colorscheme kuroi
 
 syntax on
 
