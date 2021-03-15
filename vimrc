@@ -6,7 +6,6 @@ endif
 
 call plug#begin()
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'flazz/vim-colorschemes'
 Plug 'tpope/vim-fugitive'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -15,12 +14,10 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-surround'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'janko/vim-test'
-Plug 'https://tpope.io/vim/dispatch.git'
-Plug 'arzg/vim-corvine'
 Plug 'cespare/vim-toml'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'dhruvasagar/vim-table-mode'
 Plug 'aonemd/kuroi.vim'
 call plug#end()
 
@@ -79,6 +76,7 @@ let mapleader=","
 let g:netrw_liststyle = 3
 let g:netrw_banner = 0
 
+" --------------------------------------------------------------------------------
 " Settings for COC
 " TextEdit might fail if hidden is not set.
 set hidden
@@ -120,7 +118,7 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Use <c-space> to trigger completion.
+"" Use <c-space> to trigger completion.
 if has('nvim')
   inoremap <silent><expr> <c-space> coc#refresh()
 else
@@ -211,11 +209,6 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
 " Mappings for CoCList
 " Show all diagnostics.
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
@@ -229,21 +222,13 @@ nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
 nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
 nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+" Do default action for previous item.  nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 
 
 
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-h> <c-w>h
-nnoremap <c-l> <c-w>l
-
-nnoremap <c-p> :Files <CR>
-nnoremap <c-t> :Tags <CR>
 
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
@@ -259,7 +244,7 @@ au FileType go nmap <Leader>s <Plug>(go-implements)
 au FileType go nmap <Leader>i <Plug>(go-info)
 au FileType go setlocal tabstop=4
 
-let g:go_code_completion_enabled = 1
+let g:go_code_completion_enabled = 0
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
@@ -272,11 +257,13 @@ autocmd FileType ruby setlocal nocursorline
 
 autocmd BufWritePre * :%s/\s\+$//e
 
-let test#strategy = "dispatch"
-
-au FileType go nmap <leader>t <Plug>:TestNearest<CR>
-
 let $FZF_DEFAULT_COMMAND='fd --type f'
+" [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
+
+" [Tags] Command to generate tags file
+let g:fzf_tags_command = 'ctags -R'
+
 
 let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
 
@@ -289,3 +276,15 @@ au FileType rust nmap <leader>f :RustFmt<CR>
 
 let g:rustfmt_autosave = 1
 
+let g:UltiSnipsExpandTrigger="<c-g>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+
+nnoremap <c-p> :Files <CR>
+nnoremap <c-t> :Tags <CR>
