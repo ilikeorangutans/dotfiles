@@ -19,6 +19,8 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'aonemd/kuroi.vim'
+"Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 call plug#end()
 
 let g:pymode = 1
@@ -34,7 +36,7 @@ endif
 filetype plugin indent on
 
 "colorscheme desertink
-let g:rehash256 = 1
+"let g:rehash256 = 1
 
 set background=dark
 set t_Co=256
@@ -229,6 +231,16 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 
 
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+
+nnoremap <c-p> :Files <CR>
+nnoremap ff :Files <CR>
+nnoremap ft :Tags <CR>
+nnoremap fT :BTags <CR>
+nnoremap fb :Buffers <CR>
 
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
@@ -280,11 +292,3 @@ let g:UltiSnipsExpandTrigger="<c-g>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
-
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-h> <c-w>h
-nnoremap <c-l> <c-w>l
-
-nnoremap <c-p> :Files <CR>
-nnoremap <c-t> :Tags <CR>
