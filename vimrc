@@ -6,7 +6,6 @@ endif
 
 call plug#begin()
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'flazz/vim-colorschemes'
 Plug 'tpope/vim-fugitive'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -17,11 +16,12 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'janko/vim-test'
 Plug 'https://tpope.io/vim/dispatch.git'
-Plug 'arzg/vim-corvine'
 Plug 'cespare/vim-toml'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'aonemd/kuroi.vim'
+"Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 call plug#end()
 
 let g:pymode = 1
@@ -37,7 +37,7 @@ endif
 filetype plugin indent on
 
 "colorscheme desertink
-let g:rehash256 = 1
+"let g:rehash256 = 1
 
 set background=dark
 set t_Co=256
@@ -243,7 +243,10 @@ nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
 nnoremap <c-p> :Files <CR>
-nnoremap <c-t> :Tags <CR>
+nnoremap ff :Files <CR>
+nnoremap ft :Tags <CR>
+nnoremap fT :BTags <CR>
+nnoremap fb :Buffers <CR>
 
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
@@ -259,7 +262,7 @@ au FileType go nmap <Leader>s <Plug>(go-implements)
 au FileType go nmap <Leader>i <Plug>(go-info)
 au FileType go setlocal tabstop=4
 
-let g:go_code_completion_enabled = 1
+let g:go_code_completion_enabled = 0
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
