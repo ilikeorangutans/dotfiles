@@ -18,9 +18,12 @@ Plug 'cespare/vim-toml'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'aonemd/kuroi.vim'
+Plug 'dhruvasagar/vim-table-mode'
 "Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+
+" Color schemes
+Plug 'aonemd/kuroi.vim'
 call plug#end()
 
 let g:pymode = 1
@@ -237,11 +240,18 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
-nnoremap <c-p> :Files <CR>
+" ff: find files
 nnoremap ff :Files <CR>
+" ft: find tags
 nnoremap ft :Tags <CR>
+" fT: find tags in current buffer
 nnoremap fT :BTags <CR>
+" fb: find buffers
 nnoremap fb :Buffers <CR>
+" fc: find changed files from git status
+nnoremap fc :Rg <CR>
+" fl: find in current buffer's lines
+nnoremap fl :BLines <CR>
 
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
@@ -293,3 +303,8 @@ let g:UltiSnipsExpandTrigger="<c-g>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
+" for python files set custom settings and visualize tabs because they keep
+" messing with me
+autocmd BufNewFile,BufRead *.py,*.pyw,*.c,*.h,*.pyx
+    \ setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab autoindent list listchars=tab:>-
+    \ textwidth=120 fileformat=unix
