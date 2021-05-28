@@ -73,6 +73,7 @@ set softtabstop=2
 set tabstop=8
 set undodir=~/.vim/undo//
 set wildmenu
+set scrolloff=5  " keep n number of lines between cursor and top/bottom of screen
 
 let mapleader=","
 let g:netrw_liststyle = 3
