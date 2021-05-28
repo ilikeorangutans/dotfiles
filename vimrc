@@ -77,6 +77,9 @@ set tabstop=8
 set undodir=~/.vim/undo//
 set wildmenu
 set scrolloff=5  " keep n number of lines between cursor and top/bottom of screen
+set ttyfast  " faster redrawing
+set lazyredraw
+
 
 let mapleader=","
 let g:netrw_liststyle = 3
