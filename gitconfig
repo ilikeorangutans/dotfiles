@@ -26,6 +26,7 @@
 [core]
 	excludesfile = ~/.gitignore
   editor = vim
+	commitGraph = true
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
@@ -36,9 +37,15 @@
   algorithm = patience
 
 [pager]
-  branch =
   diff = diff-so-fancy | less --tabs=4 -RFX
 [protocol]
 	version = 2
+[gc]
+	writeCommitGraph = true
 [credential]
-	helper = osxkeychain
+	helper = store --file /opt/dev/var/private/git_credential_store
+[url "https://github.com/Shopify/"]
+	insteadOf = git@github.com:Shopify/
+	insteadOf = ssh://git@github.com/shopify/
+[rebase]
+	instructionFormat = (%an <%ae>) %s
