@@ -22,6 +22,8 @@ Plug 'dhruvasagar/vim-table-mode'
 "Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
+Plug 'ziglang/zig.vim'
+
 " Color schemes
 Plug 'aonemd/kuroi.vim'
 call plug#end()
