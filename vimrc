@@ -23,6 +23,8 @@ Plug 'honza/vim-snippets'
 Plug 'hashivim/vim-terraform'
 Plug 'airblade/vim-gitgutter'
 " Plug 'leafOfTree/vim-svelte-plugin'
+Plug 'vim-test/vim-test'
+Plug 'preservim/vimux'
 
 " Color schemes
 Plug 'aonemd/kuroi.vim'
@@ -267,10 +269,13 @@ nnoremap fb :Buffers <CR>
 nnoremap fc :Rg <CR>
 " fl: find in current buffer's lines
 nnoremap fl :BLines <CR>
+" fh: find history
+nnoremap fh :History <CR>
+
 
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
-au FileType go nmap <leader>t <Plug>(go-test)
+" disabled in favor of vim-test " au FileType go nmap <leader>t <Plug>(go-test)
 au FileType go nmap <leader>c <Plug>(go-coverage)
 
 au FileType go nmap <Leader>ds <Plug>(go-def-split)
@@ -318,8 +323,22 @@ let g:UltiSnipsExpandTrigger="<c-g>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
+
+" vim test settings
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>l :TestLast<CR>
+
+"let test#strategy = "vimux"
+let test#strategy = "vimterminal"
+let test#go#gotest#options = "-v"
+
 " for python files set custom settings and visualize tabs because they keep
 " messing with me
 autocmd BufNewFile,BufRead *.py,*.pyw,*.c,*.h,*.pyx
     \ setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab autoindent list listchars=tab:>-
     \ textwidth=120 fileformat=unix
+
+autocmd BufNewFile,BufRead *.yaml,*.yml
+    \ setlocal list listchars=tab:>-
+
