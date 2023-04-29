@@ -93,6 +93,23 @@ let g:netrw_liststyle = 3
 let g:netrw_banner = 0
 
 " --------------------------------------------------------------------------------
+" Settings for Gutentags
+"
+let g:gutentags_trace = 0
+let g:gutentags_generate_on_new = 1
+let g:gutentags_generate_on_missing = 1
+let g:gutentags_generate_on_write = 1
+let g:gutentags_generate_on_empty_buffer = 0
+
+let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/')
+let g:gutentags_ctags_extra_args = [
+      \ '--tag-relative=yes',
+      \ '--fields=+ailmnS',
+      \ '--exclude=.vscode',
+      \ ]
+
+
+" --------------------------------------------------------------------------------
 " Settings for COC
 " TextEdit might fail if hidden is not set.
 set hidden
