@@ -2,5 +2,6 @@
 .swp
 
 tags
+.ctags
 !tags/
 
