@@ -31,17 +31,13 @@ Plug 'aonemd/kuroi.vim'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'haishanh/night-owl.vim'
+Plug 'ayu-theme/ayu-vim' " or other package manager
 call plug#end()
 
 let g:pymode = 1
 let g:pymode_python = 'python3'
 let g:pymode_warnings = 1
 let g:pymode_options = 1
-
-
-if has('macunix')
-  source ~/.vimrc.darwin
-endif
 
 filetype plugin indent on
 
@@ -53,7 +49,7 @@ endif
 
 set background=dark
 set t_Co=256
-colorscheme kuroi
+colorscheme ayu
 
 syntax on
 
