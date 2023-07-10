@@ -22,9 +22,16 @@ Plug 'dhruvasagar/vim-table-mode'
 Plug 'honza/vim-snippets'
 Plug 'hashivim/vim-terraform'
 Plug 'airblade/vim-gitgutter'
-" Plug 'leafOfTree/vim-svelte-plugin'
 Plug 'vim-test/vim-test'
 Plug 'preservim/vimux'
+
+Plug 'ziglang/zig.vim'
+Plug 'zah/nim.vim'
+Plug 'rust-lang/rust.vim'
+
+Plug 'hashivim/vim-terraform'
+
+Plug 'vimwiki/vimwiki'
 
 " Color schemes
 Plug 'aonemd/kuroi.vim'
@@ -32,6 +39,10 @@ Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'haishanh/night-owl.vim'
 Plug 'ayu-theme/ayu-vim' " or other package manager
+
+Plug 'godlygeek/tabular'
+Plug 'preservim/vim-markdown'
+
 call plug#end()
 
 let g:pymode = 1
@@ -109,8 +120,6 @@ let g:gutentags_ctags_extra_args = [
 
 " --------------------------------------------------------------------------------
 " Settings for COC
-" TextEdit might fail if hidden is not set.
-set hidden
 
 " Some servers have issues with backup files, see #649.
 set nobackup
@@ -166,6 +175,7 @@ nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call ShowDocumentation()<CR>
+nnoremap <leader>i :call CocAction('DocumentSymbol')<CR>
 
 function! ShowDocumentation()
   if CocAction('hasProvider', 'hover')
@@ -237,7 +247,6 @@ nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
 nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document.
 nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols.
 nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
 nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
