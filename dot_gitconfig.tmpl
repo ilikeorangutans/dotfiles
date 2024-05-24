@@ -1,0 +1,62 @@
+[core]
+	editor = vim
+	pager = less
+{{ if eq .managed_by "shopify" -}}
+# Shopify specific settings
+[gpg]
+	program = /opt/dev/bin/gpg-auto-pin
+[commit]
+	gpgSign = true
+[user]
+	name = Jakob Külzer
+	email = jakob.kulzer@shopify.com
+	signingkey = F030DF2890FC250DDCEB30248E6F1F046DB82600
+[include]
+	path = /Users/jakobkulzer/.config/dev/gitconfig
+
+[includeIf "gitdir:~/src/github.com/ilikeorangutans/"]
+  path = ~/src/github.com/ilikeorangutans/.gitconfig
+
+[includeIf "gitdir:~/src/git.sr.ht/"]
+  path = ~/src/git.sr.ht/.gitconfig
+
+[includeIf "gitdir:~/.nb/home/"]
+  path = ~/src/git.sr.ht/.gitconfig
+
+[includeIf "gitdir:~/notes/"]
+  path = ~/notes/.gitconfig
+
+{{ else -}}
+
+{{ end -}}
+
+[alias]
+  st = status
+  co = checkout
+  br = branch
+  d = diff
+  rb = rebase
+  gn = grep -n
+  gni = grep -ni
+  l = log
+  lp = log -p
+  ln = log --name-status
+  cp = cherry-pick
+  ci = commit
+  civ = commit --verbose
+  pp = pull --prune
+  wip = commit -m "wip"
+  brage = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
+[push]
+	default = nothing
+
+[pager]
+  diff = diff-so-fancy | less --tabs=4 -RFX
+
+[oh-my-zsh]
+  hide-dirty=1
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
