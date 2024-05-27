@@ -1,0 +1,44 @@
+-- Pull in the wezterm API
+local wezterm = require 'wezterm'
+
+-- This table will hold the configuration.
+local config = {}
+
+-- In newer versions of wezterm, use the config_builder which will
+-- help provide clearer error messages
+if wezterm.config_builder then
+  config = wezterm.config_builder()
+end
+
+
+-- This is where you actually apply your config choices
+
+config.hyperlink_rules = wezterm.default_hyperlink_rules()
+
+config.font = wezterm.font_with_fallback {
+  'Berkeley Mono',
+  {{- if eq .chezmoi.os "darwin" }}
+  'Apple Color Emoji'
+  {{- else }}
+  {family = 'Noto Color Emoji', weight = 'Regular'}
+  {{- end }}
+}
+
+{{- if eq .chezmoi.os "darwin" }}
+config.font_size = 13
+{{- else }}
+config.font_size = 10
+{{- end }}
+config.color_scheme = 'belge'
+
+config.window_padding = {
+  right = 4,
+  left = 4,
+  top = 4,
+  bottom = 0
+}
+
+config.audible_bell = 'Disabled'
+config.use_fancy_tab_bar = false
+
+return config
