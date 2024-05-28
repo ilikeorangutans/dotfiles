@@ -1,0 +1,4 @@
+{{- if eq .managed_by "shopify" -}}
+{{- include ".zshrc.shopify" -}}
+{{- else -}}
+{{- end -}}
