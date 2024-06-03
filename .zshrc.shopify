@@ -2,7 +2,7 @@
 export PATH=$HOME/bin:/opt/homebrew/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/jakobkulzer/.oh-my-zsh"
+export ZSH="/Users/jakob/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -110,8 +110,8 @@ alias weather='curl http://wttr.in/scarborough'
 [[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
 
 # cloudplatform: add Shopify clusters to your local kubernetes config
-export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}/Users/jakobkulzer/.kube/config:/Users/jakobkulzer/.kube/config.shopify.cloudplatform
-for file in /Users/jakobkulzer/src/github.com/Shopify/cloudplatform/workflow-utils/*.bash; do source ${file}; done
+export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}/Users/jakob/.kube/config:/Users/jakob/.kube/config.shopify.cloudplatform
+for file in /Users/jakob/src/github.com/Shopify/cloudplatform/workflow-utils/*.bash; do source ${file}; done
 kubectl-short-aliases
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -120,8 +120,5 @@ autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/Cellar/tfenv/2.2.2/versions/1.1.5/terraform terraform
 
 export PATH=~/go/bin:$PATH
-
-# opam configuration
-[[ ! -r /Users/jakobkulzer/.opam/opam-init/init.zsh ]] || source /Users/jakobkulzer/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
 eval "$(direnv hook zsh)"
