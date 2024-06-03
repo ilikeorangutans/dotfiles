@@ -181,3 +181,6 @@ nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>l :TestLast<CR>
 let test#strategy = "vimux"
 let test#go#gotest#options = "-v"
+
+let g:UltiSnipsExpandTrigger="<enter>"
+
