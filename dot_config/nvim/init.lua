@@ -71,6 +71,9 @@ require 'lspconfig'.lua_ls.setup {
                 -- (most likely LuaJIT in the case of Neovim)
                 version = 'LuaJIT'
             },
+            codeLens = {
+                enable = true,
+            },
             -- Make the server aware of Neovim runtime files
             workspace = {
                 checkThirdParty = false,
@@ -104,6 +107,35 @@ vim.diagnostic.config {
     },
 }
 
+-- ----------------------------------------------------------------------------
+-- lsp key bindings
+--vim.api.nvim_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>',
+--    { desc = 'jump to declaration', noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>',
+    { desc = 'jump to declaration', noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>',
+    { desc = 'jump to definition', noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.format()<CR>',
+    { desc = 'format the buffer', noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>i', '<cmd>lua vim.lsp.buf.implementation()<CR>',
+    { desc = 'format the buffer', noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>',
+    { desc = 'open hover', noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>a', '<cmd>lua vim.lsp.buf.code_action()<CR>',
+    { desc = 'code actions', noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'gic', '<cmd>lua vim.lsp.buf.incoming_calls()<CR>',
+    { desc = 'incoming calls', noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'goc', '<cmd>lua vim.lsp.buf.outgoing_calls()<CR>',
+    { desc = 'outgoing calls', noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>',
+    { desc = 'rename', noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>',
+    { desc = 'references', noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>',
+    { desc = 'signature help', noremap = true, silent = true })
+
+-- ----------------------------------------------------------------------------
+-- diagnostics
 vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', { desc = 'jump to previous diagnostic' })
 vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', { desc = 'jump to next diagnostic' })
 -- not sure what this one is supposed to do but it's not working?
