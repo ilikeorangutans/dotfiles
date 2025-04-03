@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-set -eu
+set -u
 
 dir=$@
 proj=$(basename $dir)
 
-if [[ $(tmux has-session -t "$proj" > /dev/null 2>&1) -ne 1 ]]; then
+if tmux has-ession -t "$proj"; then
     tmux switch -t "$proj"
 else 
     tmux new-session -c "$dir" -s "$proj" -d
