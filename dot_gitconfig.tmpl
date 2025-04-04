@@ -1,6 +1,7 @@
 [core]
-	editor = vim
-	pager = less
+	editor = nvim
+	pager = delta
+
 {{ if eq .managed_by "shopify" -}}
 # Shopify specific settings
 [gpg]
@@ -28,35 +29,71 @@
 
 {{ else -}}
 
+[user]
+	name = Jakob Külzer
+	email = jakob.kuelzer@gmail.com
+
 {{ end -}}
 
 [alias]
-  st = status
-  co = checkout
   br = branch
+  brage = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
+  ci = commit
+  civ = commit --verbose
+  co = checkout
+  cp = cherry-pick
   d = diff
-  rb = rebase
   gn = grep -n
   gni = grep -ni
   l = log
-  lp = log -p
   ln = log --name-status
-  cp = cherry-pick
-  ci = commit
-  civ = commit --verbose
+  lp = log -p
   pp = pull --prune
+  rb = rebase
+  st = status
+  sw = switch
   wip = commit -m "wip"
-  brage = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
+
 [push]
 	default = nothing
+    autoSetupRemote = true
 
 [pager]
-  diff = diff-so-fancy | less --tabs=4 -RFX
+  diff = delta --color-only
+
+[interactive]
+    diffFilter = delta --color-only
 
 [oh-my-zsh]
   hide-dirty=1
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+
+[merge]
+    conflictstyle = zdiff3
+
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    dark = true      # or light = true, or omit for auto-detection
+
+[column]
+  ui = auto
+
+[branch]
+  sort = -committerdate
+
+[init]
+  defaultBranch = main
+
+[diff]
+  algorithm = histogram
+  renames = true
+  mnemonicPrefix = true
+
+[rerere]
+  enabled = true
+  autoupdate = true
