@@ -16,7 +16,7 @@ end
 config.hyperlink_rules = wezterm.default_hyperlink_rules()
 
 config.font = wezterm.font_with_fallback {
-  'Berkeley Mono',
+  {family = 'Berkeley Mono', weight = 'Regular'},
   {{- if eq .chezmoi.os "darwin" }}
   'Apple Color Emoji'
   {{- else }}
