@@ -13,7 +13,7 @@
 	email = jakob.kulzer@shopify.com
 	signingkey = F030DF2890FC250DDCEB30248E6F1F046DB82600
 [include]
-	path = /Users/jakobkulzer/.config/dev/gitconfig
+	path = /Users/jakob/.config/dev/gitconfig
 
 [includeIf "gitdir:~/src/github.com/ilikeorangutans/"]
   path = ~/src/github.com/ilikeorangutans/.gitconfig
@@ -34,6 +34,9 @@
 	email = jakob.kuelzer@gmail.com
 
 {{ end -}}
+
+[includeIf "gitdir:~/.local/share/chezmoi/"]
+  path = ~/.local/share/chezmoi/.gitconfig
 
 [alias]
   br = branch
