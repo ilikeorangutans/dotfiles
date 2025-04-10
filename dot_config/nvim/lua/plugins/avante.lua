@@ -2,26 +2,28 @@
 return {
     "yetone/avante.nvim",
     event = "VeryLazy",
-    lazy = false,
+    lazy = true,
     -- version = false,
     config = function()
         local openai = require "avante.providers.openai"
         local has_openai_key = vim.fn.executable "openai_key" == 1
+        local vendors = {}
+
+        if vim.fn.executable('openai_key') then
+            vendors["shopify-ai"] = {
+                __inherited_from = 'openai',
+                endpoint = "https://proxy.shopify.ai/v1",
+                model = "anthropic:claude-3-5-sonnet-v2",
+                api_key_name = "cmd:openai_key cat",
+                parse_curl_args = openai.parse_curl_args,
+            }
+        end
 
         require("avante").setup {
             -- @type AvanteProvider
-            provider = 'shopify-ai',         -- has_openai_key and "shopify-ai" or nil,
+            provider = has_openai_key and "shopify-ai" or nil,
             auto_suggestions_provider = nil, -- has_openai_key and "shopify-ai" or nil,
-            vendors = {
-                ["shopify-ai"] = {
-                    __inherited_from = 'openai',
-                    endpoint = "https://proxy.shopify.ai/v1",
-                    model = "anthropic:claude-3-5-sonnet-v2",
-                    api_key_name = "cmd:openai_key cat",
-                    parse_curl_args = openai.parse_curl_args,
-                    -- parse_response_data = openai.parse_response,
-                },
-            },
+            vendors = vendors,
             hints = { enabled = true },
             highlights = {
                 diff = {
