@@ -1,6 +1,6 @@
 require("config.lazy")
 
-vim.cmd.colorscheme 'ayu'
+vim.cmd.colorscheme 'moonfly'
 vim.opt.ignorecase = true
 vim.opt.number = true
 vim.opt.relativenumber = true
