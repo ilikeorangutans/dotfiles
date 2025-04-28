@@ -6,15 +6,16 @@ return {
     -- version = false,
     config = function()
         local openai = require "avante.providers.openai"
-        local has_openai_key = vim.fn.executable "openai_key" == 1
+        local has_openai_key = vim.fn.executable "/opt/dev/bin/dev" == 1
+        -- local has_openai_key = true
         local vendors = {}
 
-        if vim.fn.executable('openai_key') then
+        if vim.fn.executable('/opt/dev/bin/dev') then
             vendors["shopify-ai"] = {
                 __inherited_from = 'openai',
                 endpoint = "https://proxy.shopify.ai/v1",
                 model = "anthropic:claude-3-5-sonnet-v2",
-                api_key_name = "cmd:openai_key cat",
+                api_key_name = "cmd:/opt/dev/bin/dev llm-gateway print-token --key",
                 parse_curl_args = openai.parse_curl_args,
             }
         end
