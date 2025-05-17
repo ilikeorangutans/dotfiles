@@ -9,6 +9,7 @@ return {
         { "fc", "<cmd>Rg<cr>",      mode = "n" },
         { "fl", "<cmd>BLines<cr>",  mode = "n" },
         { "fh", "<cmd>History<cr>", mode = "n" },
+        { "fw", "<cmd>Windows<cr>", mode = "n" },
     },
     dependencies = {
         "junegunn/fzf",
