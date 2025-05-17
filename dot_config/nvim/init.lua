@@ -154,9 +154,11 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 require 'nvim-treesitter.configs'.setup {
-    ensure_installed = { 'go', 'ruby', 'zig', 'make', 'lua', 'regex', 'yaml' },
+    ensure_installed = { 'ruby', 'zig', 'make', 'lua', 'regex', 'yaml' },
     auto_install = true,
     highlight = {
         enable = true,
     },
 }
+
+-- require 'navigator'.setup()
