@@ -8,10 +8,10 @@ return {
         local openai = require "avante.providers.openai"
         local has_openai_key = vim.fn.executable "/opt/dev/bin/dev" == 1
         -- local has_openai_key = true
-        local vendors = {}
+        local providers = {}
 
         if vim.fn.executable('/opt/dev/bin/dev') then
-            vendors["shopify-ai"] = {
+            providers["shopify-ai"] = {
                 __inherited_from = 'openai',
                 endpoint = "https://proxy.shopify.ai/v1",
                 model = "anthropic:claude-3-5-sonnet-v2",
@@ -24,7 +24,7 @@ return {
             -- @type AvanteProvider
             provider = has_openai_key and "shopify-ai" or nil,
             auto_suggestions_provider = nil, -- has_openai_key and "shopify-ai" or nil,
-            vendors = vendors,
+            providers = providers,
             hints = { enabled = true },
             highlights = {
                 diff = {
