@@ -8,7 +8,6 @@ vim.opt.cursorline = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
--- vim.opt.grepprg = "rg --vimgrep --no-heading --smart-case"
 vim.opt.signcolumn = 'yes'
 -- ?? -- vim.opt.pastetoggle = "<F11>"
 vim.opt.listchars = "tab:>-,trail:·" -- Set chars to show for tabs or trailing whitespace
@@ -23,6 +22,7 @@ local mason_ensure_installed = {
     'golangci-lint-langserver',
     'ruby-lsp',
     'sorbet', -- not sure if that will work as expected, might have to use locally installed one
+    'rubocop',
     'zls',
     'yaml-language-server',
 }
@@ -41,21 +41,6 @@ require("mason-lspconfig").setup()
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
-
-require 'lspconfig'.gopls.setup {
-    capabilities = capabilities,
-}
-require 'lspconfig'.golangci_lint_ls.setup {}
-require 'lspconfig'.zls.setup {}
-require 'lspconfig'.sorbet.setup {}
-require 'lspconfig'.rubocop.setup {
-    capabilities = capabilities,
-}
-require 'lspconfig'.ruby_lsp.setup {
-    capabilities = capabilities,
-}
-require 'lspconfig'.yamlls.setup {}
-
 
 require 'lspconfig'.lua_ls.setup {
     on_init = function(client)
