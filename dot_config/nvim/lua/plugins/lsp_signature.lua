@@ -6,5 +6,10 @@ return {
       handler_opts = {
           border = "rounded",
       },
+      hint_prefix = {
+          above = "↙ ", 
+          current = "← ", 
+          below = "↖ " 
+      }
   },
 }
