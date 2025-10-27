@@ -39,9 +39,6 @@ end)
 
 require("mason-lspconfig").setup()
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
-
 vim.lsp.config(
     "lua_ls", 
     {
@@ -148,3 +145,5 @@ require 'nvim-treesitter.configs'.setup {
         enable = true,
     },
 }
+
+require("luasnip.loaders.from_snipmate").lazy_load();
