@@ -95,10 +95,8 @@ vim.diagnostic.config {
 
 -- ----------------------------------------------------------------------------
 -- lsp key bindings
---vim.api.nvim_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>',
---    { desc = 'jump to declaration', noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>',
-    { desc = 'jump to declaration', noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.type_definition()<CR>',
+    { desc = 'jump to type definition', noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>',
     { desc = 'jump to definition', noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.format()<CR>',
