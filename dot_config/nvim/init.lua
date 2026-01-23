@@ -136,12 +136,13 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     end
 })
 
-require 'nvim-treesitter.configs'.setup {
-    ensure_installed = { 'ruby', 'zig', 'make', 'lua', 'regex', 'yaml' },
-    auto_install = true,
-    highlight = {
-        enable = true,
-    },
-}
+require('nvim-treesitter').install({ 'ruby', 'zig', 'make', 'lua', 'yaml' })
+-- {
+--     ensure_installed = { 'ruby', 'zig', 'make', 'lua', 'regex', 'yaml' },
+--     auto_install = true,
+--     highlight = {
+--         enable = true,
+--     },
+-- }
 
 require("luasnip.loaders.from_snipmate").lazy_load();

@@ -24,10 +24,12 @@ return {
     opts = {
         adapters = {
             ["neotest-golang"] = {
+                -- runner = "gotestsum",
                 go_test_args = {
                     "-v",
+                    "-count=1",
                     "-timeout=10s",
-                    "-coverprofile=" .. vim.fn.getcwd() .. "/coverage.out",
+                    "-race"
                 },
             },
             ["neotest-zig"] = {
