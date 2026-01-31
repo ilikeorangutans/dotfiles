@@ -23,6 +23,7 @@ local mason_ensure_installed = {
     'ruby-lsp',
     'sorbet', -- not sure if that will work as expected, might have to use locally installed one
     'rubocop',
+    'tree-sitter-cli',
     'zls',
     'yaml-language-server',
 }
@@ -37,6 +38,7 @@ mr.refresh(function()
     end
 end)
 
+require("nvim-treesitter").setup()
 require("mason-lspconfig").setup()
 
 vim.lsp.config(
@@ -137,12 +139,5 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 require('nvim-treesitter').install({ 'ruby', 'zig', 'make', 'lua', 'yaml' })
--- {
---     ensure_installed = { 'ruby', 'zig', 'make', 'lua', 'regex', 'yaml' },
---     auto_install = true,
---     highlight = {
---         enable = true,
---     },
--- }
 
 require("luasnip.loaders.from_snipmate").lazy_load();
