@@ -16,6 +16,10 @@ window#waybar.hidden {
     opacity: 0.2;
 }
 
+#custom-notification {
+  font-family: "NotoSansMono Nerd Font";
+}
+
 /*
 window#waybar.empty {
     background-color: transparent;
