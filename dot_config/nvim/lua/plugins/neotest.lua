@@ -17,7 +17,7 @@ return {
         "nvim-lua/plenary.nvim",
         "antoinemadec/FixCursorHold.nvim",
         { "nvim-treesitter/nvim-treesitter", branch = "main" },
-        { "fredrikaverpil/neotest-golang", version = "*" },
+        { "fredrikaverpil/neotest-golang",   version = "*" },
         "lawrence-laz/neotest-zig",
         "zidhuss/neotest-minitest",
     },
