@@ -42,7 +42,7 @@ require("nvim-treesitter").setup()
 require("mason-lspconfig").setup()
 
 vim.lsp.config(
-    "lua_ls", 
+    "lua_ls",
     {
         on_init = function(client)
             if client.workspace_folders then
@@ -80,6 +80,19 @@ vim.lsp.config(
         },
     }
 )
+
+vim.lsp.config("gopls", {
+    settings = {
+        gopls = {
+            ["ui.inlayhint.hints"] = {
+                compositeLiteralFields = true,
+                constantValues = true,
+                parameterNames = true,
+                functionTypeParameters = true,
+            },
+        },
+    },
+})
 
 vim.diagnostic.config {
     severity_sort = true,

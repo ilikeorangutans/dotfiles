@@ -79,6 +79,9 @@ return {
             opts.adapters = adapters
         end
 
+        opts.diagnostic = {
+        }
+
         require("neotest").setup(opts)
     end,
     keys = {
