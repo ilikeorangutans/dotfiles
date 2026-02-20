@@ -187,7 +187,7 @@
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
     },
     "custom/power": {
-        "format" : "⏻ ",
+        "format" : "<span size='16pt'>⏻</span> ",
 		"tooltip": false,
 		"menu": "on-click",
 		"menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
@@ -200,7 +200,7 @@
     },
     "custom/notification": {
         "tooltip": true,
-        "format": "<span size='16pt'>{icon}</span>",
+        "format": "<span size='14pt'>{icon}</span> ",
         "format-icons": {
             "notification": "󱅫",
             "none": "󰂜",
