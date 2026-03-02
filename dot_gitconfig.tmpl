@@ -2,30 +2,21 @@
 	editor = nvim
 	pager = delta
 
-{{ if eq .managed_by "shopify" -}}
-# Shopify specific settings
-[gpg]
-	program = /opt/dev/bin/gpg-auto-pin
+{{ if eq .managed_by "wealthsimple" -}}
+# wealthsimple specific settings
+#[gpg]
+#	program = /opt/dev/bin/gpg-auto-pin
 [commit]
 	gpgSign = true
 [user]
 	name = Jakob Külzer
-	email = jakob.kulzer@shopify.com
-	signingkey = F030DF2890FC250DDCEB30248E6F1F046DB82600
-[include]
-	path = /Users/jakob/.config/dev/gitconfig
+	email = jakob.kuelzer@wealthsimple.com
 
 [includeIf "gitdir:~/src/github.com/ilikeorangutans/"]
   path = ~/src/github.com/ilikeorangutans/.gitconfig
 
 [includeIf "gitdir:~/src/git.sr.ht/"]
   path = ~/src/git.sr.ht/.gitconfig
-
-[includeIf "gitdir:~/.nb/home/"]
-  path = ~/src/git.sr.ht/.gitconfig
-
-[includeIf "gitdir:~/notes/"]
-  path = ~/notes/.gitconfig
 
 {{ else -}}
 

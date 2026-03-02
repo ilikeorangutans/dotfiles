@@ -1,2 +1,7 @@
 [push]
   default = current
+
+[user]
+	name = Jakob Külzer
+	email = jakob.kuelzer@gmail.com
+
