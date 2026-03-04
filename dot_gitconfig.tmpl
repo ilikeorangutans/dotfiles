@@ -4,13 +4,21 @@
 
 {{ if eq .managed_by "wealthsimple" -}}
 # wealthsimple specific settings
-#[gpg]
-#	program = /opt/dev/bin/gpg-auto-pin
+
+[gpg]
+  format = ssh
+
 [commit]
-	gpgSign = true
+  gpgSign = true
+
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+  allowedSignersFile = ~/.config/git/allowed_signers
+
 [user]
-	name = Jakob Külzer
-	email = jakob.kuelzer@wealthsimple.com
+  name = Jakob Külzer
+  email = jakob.kuelzer@wealthsimple.com
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAxqBf9x/fikAFKSmej6H43RrS4T6VJXyi/82gBG+l4P
 
 [includeIf "gitdir:~/src/github.com/ilikeorangutans/"]
   path = ~/src/github.com/ilikeorangutans/.gitconfig
@@ -21,8 +29,8 @@
 {{ else -}}
 
 [user]
-	name = Jakob Külzer
-	email = jakob.kuelzer@gmail.com
+  name = Jakob Külzer
+  email = jakob.kuelzer@gmail.com
 
 {{ end -}}
 
