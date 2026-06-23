@@ -598,7 +598,7 @@ require("lazy").setup({
 				-- Disable "format_on_save lsp_fallback" for languages that don't
 				-- have a well standardized coding style. You can add additional
 				-- languages here or re-enable it for the disabled ones.
-				local disable_filetypes = { c = true, cpp = true }
+				local disable_filetypes = { c = true, cpp = true, go = true }
 				if disable_filetypes[vim.bo[bufnr].filetype] then
 					return nil
 				else
@@ -759,9 +759,17 @@ require("lazy").setup({
 		lazy = false,
 		priority = 1000,
 		config = function()
-			vim.cmd("colorscheme cyberdream")
 		end,
 	},
+  {
+    "zootedb0t/citruszest.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd("colorscheme citruszest")
+    end
+  },
+  { "miikanissi/modus-themes.nvim", priority = 1000 },
 
 	-- Highlight todo, notes, etc in comments
 	{
