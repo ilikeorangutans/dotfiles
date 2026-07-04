@@ -31,6 +31,10 @@
         "custom/notification",
         "custom/power"
     ],
+    "niri/language": {
+        "format": "{short}",
+        "on-click": "niri msg action switch-layout next",
+    },
     "keyboard-state": {
         "numlock": true,
         "capslock": true,
@@ -194,7 +198,7 @@
 		"menu-actions": {
 			"shutdown": "shutdown",
 			"reboot": "reboot",
-			"suspend": "systemctl suspend",
+			"suspend": "systemctl sleep",
 			"hibernate": "systemctl hibernate"
 		}
     },
