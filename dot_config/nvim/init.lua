@@ -63,7 +63,7 @@ vim.o.winborder = "rounded"
 --   See `:help lua-options`
 --   and `:help lua-guide-options`
 vim.o.list = true
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+vim.opt.listchars = { tab = "· ", trail = "·", nbsp = "␣" }
 
 -- Preview substitutions live, as you type!
 vim.o.inccommand = "split"
@@ -504,6 +504,7 @@ require("lazy").setup({
 								functionTypeParameters = true,
 							},
 							symbolScope = "all",
+              fileWatcher = "fsnotify",
 						},
 					},
 				},
@@ -580,7 +581,7 @@ require("lazy").setup({
 
 	{ -- Autoformat
 		"stevearc/conform.nvim",
-		event = { "BufWritePre" },
+    -- event = { "BufWritePre" },
 		cmd = { "ConformInfo" },
 		keys = {
 			{
@@ -594,22 +595,23 @@ require("lazy").setup({
 		},
 		opts = {
 			notify_on_error = false,
-			format_on_save = function(bufnr)
-				-- Disable "format_on_save lsp_fallback" for languages that don't
-				-- have a well standardized coding style. You can add additional
-				-- languages here or re-enable it for the disabled ones.
-				local disable_filetypes = { c = true, cpp = true, go = true }
-				if disable_filetypes[vim.bo[bufnr].filetype] then
-					return nil
-				else
-					return {
-						timeout_ms = 500,
-						lsp_format = "fallback",
-					}
-				end
-			end,
+--       format_on_save = function(bufnr)
+--         -- Disable "format_on_save lsp_fallback" for languages that don't
+--         -- have a well standardized coding style. You can add additional
+--         -- languages here or re-enable it for the disabled ones.
+--         local disable_filetypes = { c = true, cpp = true, go = true }
+--         if disable_filetypes[vim.bo[bufnr].filetype] then
+--           return nil
+--         else
+--           return {
+--             timeout_ms = 500,
+--             lsp_format = "fallback",
+--           }
+--         end
+--       end,
 			formatters_by_ft = {
 				lua = { "stylua" },
+        -- templ = { "templ"},
 				-- Conform can also run multiple formatters sequentially
 				-- python = { "isort", "black" },
 				--
@@ -1081,6 +1083,15 @@ require("lazy").setup({
 			lazy = "💤 ",
 		},
 	},
+})
+
+-- Automatically start treesitter for templ files to enable syntax highlighting
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "templ",
+  callback = function()
+    vim.treesitter.start()
+    vim.lsp.enable("templ")
+  end,
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
