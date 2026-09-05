@@ -511,7 +511,7 @@ require("lazy").setup({
 								functionTypeParameters = true,
 							},
 							symbolScope = "all",
-              fileWatcher = "fsnotify",
+							fileWatcher = "fsnotify",
 						},
 					},
 				},
@@ -548,6 +548,7 @@ require("lazy").setup({
 
 			for name, server in pairs(servers) do
 				server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+				-- TODO: one of these days i gotta split between mason installing shit and enabling the server.
 				vim.lsp.config(name, server)
 				vim.lsp.enable(name)
 			end
@@ -588,7 +589,7 @@ require("lazy").setup({
 
 	{ -- Autoformat
 		"stevearc/conform.nvim",
-    -- event = { "BufWritePre" },
+		-- event = { "BufWritePre" },
 		cmd = { "ConformInfo" },
 		keys = {
 			{
@@ -602,23 +603,23 @@ require("lazy").setup({
 		},
 		opts = {
 			notify_on_error = false,
---       format_on_save = function(bufnr)
---         -- Disable "format_on_save lsp_fallback" for languages that don't
---         -- have a well standardized coding style. You can add additional
---         -- languages here or re-enable it for the disabled ones.
---         local disable_filetypes = { c = true, cpp = true, go = true }
---         if disable_filetypes[vim.bo[bufnr].filetype] then
---           return nil
---         else
---           return {
---             timeout_ms = 500,
---             lsp_format = "fallback",
---           }
---         end
---       end,
+			--       format_on_save = function(bufnr)
+			--         -- Disable "format_on_save lsp_fallback" for languages that don't
+			--         -- have a well standardized coding style. You can add additional
+			--         -- languages here or re-enable it for the disabled ones.
+			--         local disable_filetypes = { c = true, cpp = true, go = true }
+			--         if disable_filetypes[vim.bo[bufnr].filetype] then
+			--           return nil
+			--         else
+			--           return {
+			--             timeout_ms = 500,
+			--             lsp_format = "fallback",
+			--           }
+			--         end
+			--       end,
 			formatters_by_ft = {
 				lua = { "stylua" },
-        -- templ = { "templ"},
+				-- templ = { "templ"},
 				-- Conform can also run multiple formatters sequentially
 				-- python = { "isort", "black" },
 				--
@@ -767,18 +768,16 @@ require("lazy").setup({
 		"scottmckendry/cyberdream.nvim",
 		lazy = false,
 		priority = 1000,
+	},
+	{
+		"zootedb0t/citruszest.nvim",
+		lazy = false,
+		priority = 1000,
 		config = function()
+			vim.cmd("colorscheme citruszest")
 		end,
 	},
-  {
-    "zootedb0t/citruszest.nvim",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      vim.cmd("colorscheme citruszest")
-    end
-  },
-  { "miikanissi/modus-themes.nvim", priority = 1000 },
+	{ "miikanissi/modus-themes.nvim", priority = 1000 },
 
 	-- Highlight todo, notes, etc in comments
 	{
@@ -1092,13 +1091,20 @@ require("lazy").setup({
 	},
 })
 
+vim.filetype.add({ extension = { templ = "templ" } })
+
 -- Automatically start treesitter for templ files to enable syntax highlighting
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "templ",
-  callback = function()
-    vim.treesitter.start()
-    vim.lsp.enable("templ")
-  end,
+	pattern = "templ",
+	callback = function()
+		vim.treesitter.start()
+		vim.lsp.config("templ", {
+			cmd = { "go", "tool", "templ", "lsp" },
+			filetypes = { "templ" },
+			root_markers = { "go.mod", ".git" },
+		})
+		vim.lsp.enable("templ")
+	end,
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
